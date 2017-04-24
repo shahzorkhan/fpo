@@ -1,0 +1,22 @@
+{
+ "align_labels_left": 0, 
+ "creation": "2017-04-24 04:46:44.162775", 
+ "custom_format": 1, 
+ "disabled": 0, 
+ "doc_type": "Farmer Quotation", 
+ "docstatus": 0, 
+ "doctype": "Print Format", 
+ "font": "Default", 
+ "html": "<style>\n\t.print-format table, .print-format tr, \n\t.print-format td, .print-format div, .print-format p {\n\t\tfont-family: Monospace;\n\t\tline-height: 200%;\n\t\tvertical-align: middle;\n\t}\n\t@media screen {\n\t\t.print-format {\n\t\t\twidth: 4in;\n\t\t\tpadding: 0.25in;\n\t\t\tmin-height: 8in;\n\t\t}\n\t}\n</style>\n\n<p class=\"text-center\">\n\t{{ company }}<br>\n\t{{  __(\"POP No : \") }}{{offline_pop_name}}<br>\n</p>\n<p>\n\t<b>{{ __(\"Date\") }}:</b> {{ dateutil.global_date_format(transaction_date) }}<br>\n</p>\n\n<hr>\n<table class=\"table table-condensed cart no-border\">\n\t<thead>\n\t\t<tr>\n\t\t\t<th width=\"40%\">{{ __(\"Item\") }}</b></th>\n\t\t\t<th width=\"20%\">{{ __(\"Grade\") }}</b></th>\n\t\t\t<th width=\"20%\" class=\"text-right\">{{ __(\"Qty\") }}</th>\n\t\t\t<th width=\"20%\" class=\"text-right\">{{ __(\"Amount\") }}</th>\n\t\t</tr>\n\t</thead>\n\t<tbody>\n\t\t{% for item in items %}\n\t\t<tr>\n\t\t\t<td>\n\t\t\t\t{{ item.item_name }}\n\t\t\t</td>\n\t\t\t<td>\n\t\t\t\t{{ item.grade}}\n\t\t\t</td>\n\t\t\t<td class=\"text-right\">{{ format_number(item.qty, precision(\"difference\")) }} {{ item.uom }}<br>@ {{ format_currency(item.rate, currency) }}</td>\n\t\t\t<td class=\"text-right\">{{ format_currency(item.amount, currency) }}</td>\n\t\t</tr>\n\t\t{% endfor %}\n\t</tbody>\n</table>\n\n<table class=\"table table-condensed no-border\">\n\t<tbody>\t\t\n\t\t<tr>\n\t\t\t<td class=\"text-right\" style=\"width: 75%\">\n\t\t\t\t<b>{{ __(\"Grand Total\") }}</b>\n\t\t\t</td>\n\t\t\t<td class=\"text-right\">\n\t\t\t\t{{ format_currency(grand_total, currency) }}\n\t\t\t</td>\n\t\t</tr>\n\t</tbody>\n</table>\n\n\n<hr>\n<p class=\"text-center\">{{ __(\"Thank you, please visit again.\") }}</p>", 
+ "idx": 0, 
+ "line_breaks": 0, 
+ "modified": "2017-04-24 05:17:08.198677", 
+ "modified_by": "Administrator", 
+ "module": "FPO", 
+ "name": "Point of Purchase", 
+ "owner": "Administrator", 
+ "print_format_builder": 0, 
+ "print_format_type": "Js", 
+ "show_section_headings": 0, 
+ "standard": "Yes"
+}

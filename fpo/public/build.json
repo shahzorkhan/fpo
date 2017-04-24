@@ -1,0 +1,23 @@
+{
+    "css/fpo.css": [
+        "public/css/fpo.css"
+    ],
+    "js/fpo-web.min.js": [
+        "public/js/pop/pop.html",
+        "public/js/pop/pop_bill_item.html",
+        "public/js/pop/pop_item.html",
+        "public/js/pop/pop_tax_row.html",
+        "public/js/pop/pop_invoice_list.html",
+        "public/js/payment/pop_payment.html",
+        "public/js/payment/payment_details.html"
+    ],
+    "js/fpo.min.js": [
+        "public/js/pop/pop.html",
+        "public/js/pop/pop_bill_item.html",
+        "public/js/pop/pop_item.html",
+        "public/js/pop/pop_tax_row.html",
+        "public/js/pop/pop_invoice_list.html",
+        "public/js/payment/pop_payment.html",
+        "public/js/payment/payment_details.html"
+    ]
+}

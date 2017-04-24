@@ -1,0 +1,87 @@
+<div class="pop">
+    <div class="row">
+    	<div class="col-sm-6 pop-bill-wrapper">
+            <div class="pop-bill-toolbar" style="display: flex;">
+                <div class="party-area" style="flex: 1;"></div>
+				<button class="btn btn-default list-customers-btn" style="margin: 0 5px 0 15px;">
+					<i class="fa fa-list"></i>
+				</button>
+				<button class="btn btn-default add-customer-btn">
+					<i class="fa fa-plus"></i>
+				</button>
+				{% if (allow_delete) { %}
+					<button class="btn btn-default btn-danger" style="margin: 0 5px 0 5px;display:none">
+						<i class="octicon octicon-trashcan"></i>
+					</button>
+				{% } %}
+            </div>
+    		<div class="pop-bill">
+    			<div class="item-cart">
+                    <div class="row pop-bill-row pop-bill-header">
+                        <div class="col-xs-4"><h6>{%= __("Item") %}</h6></div>
+						<div class="col-xs-2"><h6 class="text-right">{%= __("Grade") %}</h6></div>
+                        <div class="col-xs-2"><h6 class="text-right">{%= __("Quantity") %}</h6></div>
+                        <div class="col-xs-2"><h6 class="text-right">{%= __("UOM") %}</h6></div>
+                        <div class="col-xs-2"><h6 class="text-right">{%= __("Rate") %}</h6></div>
+                    </div>
+                    <div class="items"></div>
+    			</div>
+    			<div class="totals-area">
+                    <div class="row pop-bill-row net-total-area">
+                        <div class="col-xs-6"><h6 class="text-muted">{%= __("Net Total") %}</h6></div>
+                        <div class="col-xs-6"><h6 class="net-total text-right"></h6></div>
+                    </div>
+                    <div class="row pop-bill-row tax-area hide">
+						<div class="col-xs-12 text-muted">
+	                        <h6>{%= __("Taxes") %}</h6>
+							<div class="tax-table small"></div>
+						</div>
+                    </div>
+					{% if (apply_discount_on) { %}
+	                    <div class="row pop-bill-row discount-amount-area">
+	                        <div class="col-xs-6"><h6 class="text-muted">{%= __("Discount") %}</h6></div>
+							<div class="col-xs-3 discount-field-col">
+								<div class="input-group input-group-sm">
+									<span class="input-group-addon">%</span>
+									<input type="text" class="form-control discount-percentage text-right">
+								</div>
+							</div>
+	                        <div class="col-xs-3 discount-field-col">
+								<div class="input-group input-group-sm">
+									<span class="input-group-addon">{%= get_currency_symbol(currency) %}</span>
+									<input type="text" class="form-control discount-amount text-right"
+								  		placeholder="{%= 0.00 %}">
+								</div>
+							</div>
+	                    </div>
+					{% } %} 
+                    <div class="row pop-bill-row grand-total-area">
+                        <div class="col-xs-6"><h6>{%= __("Grand Total") %}</h6></div>
+                        <div class="col-xs-6"><h6 class="grand-total text-right"></h6></div>
+                    </div>
+    			</div>
+    		</div>
+			<div class="list-customers">
+
+			</div>
+    	</div>
+    	<div class="col-sm-6 pop-items-section">
+			<div class="row pop-item-area">
+
+			</div>
+			<span id="customer-results" style="color:#68a;"></span>
+            <div class="row pop-item-toolbar">
+				<div class="quotation_type col-xs-5"></div>
+				<div class="search-item col-xs-7"></div>
+            </div>
+    		<div class="item-list-area" style="auto">
+				<div class="app-listing item-list"></ul>
+    		</div>
+    	</div>
+		<div class="row">
+			<div class="text-right list-paging-area">
+				<button class="btn btn-default btn-more btn-sm" style="margin:5px 20px">{{ __("More") }}</button>
+			</div>
+		</div>
+    </div>
+</div>

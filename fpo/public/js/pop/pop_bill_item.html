@@ -1,0 +1,30 @@
+<div class="row pop-bill-row pop-bill-item" data-item-code="{%= item_code %}">
+    <div class="col-xs-4"><h6>{%= item_code || "" %}{%= __(item_name) || "" %}</h6></div>
+    <div class="col-xs-2 text-left">
+		<div class="row input-sm">
+            <input type="text" value="{%= grade %}" class="form-control text-left pop-item-grade">
+        </div>
+    </div>
+    <div class="col-xs-2">
+        <div class="row pop-qty-row">
+            <div class="col-xs-2 text-center pop-qty-btn" data-action="decrease-qty"><i class="fa fa-minus text-muted" style="font-size:12px"></i></div>
+            <div class="col-xs-8">
+				<div>
+                    <input type="tel" value="{%= qty %}" class="form-control   pop-item-qty text-right">
+                </div>
+            </div>
+            <div class="col-xs-2 text-center pop-qty-btn" data-action="increase-qty"><i class="fa fa-plus text-muted" style="font-size:12px"></i></div>
+        </div>
+    </div>
+    <div class="col-xs-2">{%= __(uom) || "" %}</div>
+    <div class="col-xs-2 text-right">
+        <div class="text-muted" style="margin-top: 5px;">
+			{% if(enabled) { %}
+				<input type="tel" value="{%= rate %}" class="form-control input-sm pop-item-rate text-right">
+			{% } else { %}
+				<h6>{%= format_currency(rate) %}</h6>
+			{% } %}
+		</div>
+		<p><h6>{%= amount %}</h6></p>
+    </div>
+</div>
