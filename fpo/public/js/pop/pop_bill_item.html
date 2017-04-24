@@ -2,7 +2,7 @@
     <div class="col-xs-4"><h6>{%= item_code || "" %}{%= __(item_name) || "" %}</h6></div>
     <div class="col-xs-2 text-left">
 		<div class="row input-sm">
-            <input type="text" value="{%= grade %}" class="form-control text-left pop-item-grade">
+            <input type="text" value="{%= grade %}" class="form-control text-center pop-item-text">
         </div>
     </div>
     <div class="col-xs-2">
@@ -16,7 +16,7 @@
             <div class="col-xs-2 text-center pop-qty-btn" data-action="increase-qty"><i class="fa fa-plus text-muted" style="font-size:12px"></i></div>
         </div>
     </div>
-    <div class="col-xs-2">{%= __(uom) || "" %}</div>
+    <div class="col-xs-2 text-center h6">{%= __(uom) || "" %}</div>
     <div class="col-xs-2 text-right">
         <div class="text-muted" style="margin-top: 5px;">
 			{% if(enabled) { %}
