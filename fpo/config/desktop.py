@@ -19,11 +19,5 @@ def get_data():
 			"type": "page",
 			"link": "pop",
 			"label": _("POP")
-		},
-		{
-			"type": "doctype",
-			"name": "Farmers",
-			"label": _("Farmers"),
-			"description": _("Farmers assigned to you and by you."),
-		},
+		}
 	]
