@@ -1357,6 +1357,11 @@ fpo.pop.PointOfPurchase = erpnext.taxes_and_totals.extend({
 		if (this.frm.doc.items.length == 0) {
 			frappe.throw(__("Select items to save the invoice"))
 		}
+		for (item in this.frm.doc.items) {
+			if(!item.grade){
+			    frappe.throw(__("Set grade of all items to save the invoice"))
+            }
+		}
 	},
 
     validate_quotation_type: function () {
