@@ -14,7 +14,8 @@
   border: 1px solid #d1d8dd;
   margin-bottom: 5px;
 }
-.pop-item-text {
+.pop-item-text,
+.pop-item-grade {
   padding: 0px 5px;
 }
 .pop-item .item-code {
