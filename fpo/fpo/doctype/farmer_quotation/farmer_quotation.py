@@ -30,9 +30,9 @@ class FarmerQuotation(Document):
 def make_purchase_invoice(source_name, target_doc=None):
     def set_missing_values(source, target):
         target.ignore_pricing_rule = 1
+        set_supplier(source, target)
         target.run_method("set_missing_values")
         target.run_method("calculate_taxes_and_totals")
-        set_supplier(source, target)
 
     def set_supplier(source, target):
         farmer = frappe.get_doc("Farmer", source.get('farmer'))
