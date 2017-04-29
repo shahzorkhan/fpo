@@ -49,6 +49,7 @@ def make_purchase_invoice(source_name, target_doc=None):
             supplier_doc.image = farmer.get('image')
             supplier_doc.supplier_type = 'Farmer'
             supplier_doc.supplier_details = farmer.get("address")+ "\r\n"+ farmer.get('bank_details')
+            supplier_doc.save()
             frappe.db.commit()
 
         target.supplier = farmer.get('name')
