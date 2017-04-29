@@ -43,9 +43,8 @@ def make_purchase_invoice(source_name, target_doc=None):
             supplier_type.save(ignore_permissions=True)
             frappe.db.commit()
 
-        if not frappe.db.exists('Supplier', farmer.get('name')):
+        if not frappe.db.exists('Supplier', source.get('farmer')):
             supplier_doc = frappe.new_doc('Supplier')
-            supplier_doc.name = farmer.get('name')
             supplier_doc.supplier_name = farmer.get('title')
             supplier_doc.image = farmer.get('image')
             supplier_doc.supplier_type = 'Farmer'
