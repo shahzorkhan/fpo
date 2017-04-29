@@ -51,7 +51,7 @@ def make_purchase_invoice(source_name, target_doc=None):
             supplier_doc.supplier_details = farmer.get("address")+ "\r\n"+ farmer.get('bank_details')
             frappe.db.commit()
 
-        target.supplier = source.get('farmer')
+        target.supplier = farmer.get('name')
 
     def update_quotation(source_doc, target_doc, source_parent):
         target_doc.from_farmer_quotation = source_doc.name
