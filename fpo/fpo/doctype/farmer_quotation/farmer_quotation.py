@@ -20,10 +20,6 @@ class FarmerQuotation(Document):
         pass
 
     def set_status_from_docStatus(self):
-        #        if not self.status and not not self.docstatus:
-        # if not not self.docstatus  :
-        print (self.docstatus)
-        print (self.status)
         self.status = fq_status_map[self.docstatus or 0]
 
 @frappe.whitelist()
@@ -45,6 +41,7 @@ def make_purchase_invoice(source_name, target_doc=None):
 
         if not frappe.db.exists('Supplier', source.get('farmer')):
             supplier_doc = frappe.new_doc('Supplier')
+            supplier_doc.name = farmer.get('name')
             supplier_doc.supplier_name = farmer.get('title')
             supplier_doc.image = farmer.get('image')
             supplier_doc.supplier_type = 'Farmer'
