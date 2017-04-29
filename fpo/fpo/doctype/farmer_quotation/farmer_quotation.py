@@ -32,6 +32,26 @@ def make_purchase_invoice(source_name, target_doc=None):
         target.ignore_pricing_rule = 1
         target.run_method("set_missing_values")
         target.run_method("calculate_taxes_and_totals")
+        set_supplier(source, target)
+
+    def set_supplier(source, target):
+        farmer = frappe.get_doc("Farmer", source.get('farmer'))
+
+        if not frappe.db.exists('Supplier Type', 'Farmer'):
+            supplier_type = frappe.new_doc('Supplier_Type')
+            supplier_type.supplier_type = 'Farmer'
+            supplier_type.save(ignore_permissions=True)
+            frappe.db.commit()
+
+        if not frappe.db.exists('Supplier', source.get('farmer')):
+            supplier_doc = frappe.new_doc('Supplier')
+            supplier_doc.name = farmer.get('name')
+            supplier_doc.image = farmer.get('image')
+            supplier_doc.supplier_type = 'Farmer'
+            supplier_doc.supplier_details = farmer.get("address")+ "\r\n"+ farmer.get('bank_details')
+            frappe.db.commit()
+
+        target.supplier = source.get('farmer')
 
     def update_quotation(source_doc, target_doc, source_parent):
         target_doc.from_farmer_quotation = source_doc.name
