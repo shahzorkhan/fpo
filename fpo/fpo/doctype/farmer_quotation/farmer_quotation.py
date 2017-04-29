@@ -46,6 +46,7 @@ def make_purchase_invoice(source_name, target_doc=None):
         if not frappe.db.exists('Supplier', source.get('farmer')):
             supplier_doc = frappe.new_doc('Supplier')
             supplier_doc.name = farmer.get('name')
+            supplier_doc.supplier_name = farmer.get('title')
             supplier_doc.image = farmer.get('image')
             supplier_doc.supplier_type = 'Farmer'
             supplier_doc.supplier_details = farmer.get("address")+ "\r\n"+ farmer.get('bank_details')
