@@ -39,7 +39,9 @@ def make_purchase_invoice(source_name, target_doc=None):
             supplier_type.save(ignore_permissions=True)
             frappe.db.commit()
 
-        if not frappe.db.exists('Supplier', source.get('farmer')):
+        supplier = frappe.db.get_value('Supplier', {"supplier_name": farmer.get('title')}, ["name", 'supplier_name'], as_dict=1)
+
+        if supplier is None:
             supplier_doc = frappe.new_doc('Supplier')
             supplier_doc.name = farmer.get('name')
             supplier_doc.supplier_name = farmer.get('title')
@@ -49,15 +51,17 @@ def make_purchase_invoice(source_name, target_doc=None):
             supplier_doc.save()
             frappe.db.commit()
 
-        if not frappe.db.exists('Supplier', source.get('farmer')):
+            supplier = frappe.db.get_value('Supplier', {"supplier_name": farmer.get('title')}, ["name", 'supplier_name'], as_dict=1)
+
+        if not frappe.db.exists('Supplier', supplier.get('name')):
             frappe.throw((
                 'Could not create supplier from farmer frappe.db.exists("Supplier", ID) failed for {0}')
-                         .format(source.get('farmer')))
+                         .format(supplier.get('name')))
 
         credit_days_based_on, credit_days, supplier_type = \
-            frappe.db.get_value('Supplier', source.get('farmer'), ["credit_days_based_on", "credit_days", "supplier_type"])
+            frappe.db.get_value('Supplier', supplier.get('name'), ["credit_days_based_on", "credit_days", "supplier_type"])
 
-        target.supplier = source.get('farmer')
+        target.supplier = supplier.get('name')
 
     def update_quotation(source_doc, target_doc, source_parent):
         target_doc.from_farmer_quotation = source_doc.name
