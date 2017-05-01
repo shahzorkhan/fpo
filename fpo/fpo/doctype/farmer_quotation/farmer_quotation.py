@@ -20,7 +20,8 @@ class FarmerQuotation(Document):
         pass
 
     def set_status_from_docStatus(self):
-        self.status = fq_status_map[self.docstatus or 0]
+        if self.status != "Promoted":
+            self.status = fq_status_map[self.docstatus or 0]
 
 @frappe.whitelist()
 def make_purchase_invoice(source_name, target_doc=None):
@@ -31,6 +32,9 @@ def make_purchase_invoice(source_name, target_doc=None):
         target.run_method("calculate_taxes_and_totals")
         source.purchase_invoice = target.name
         source.status = "Promoted"
+        target.save()
+        source.save()
+        frappe.db.commit()
 
     def set_supplier(source, target):
         farmer = frappe.get_doc("Farmer", source.get('farmer'))
