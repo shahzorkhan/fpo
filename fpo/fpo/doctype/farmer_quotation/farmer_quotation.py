@@ -64,7 +64,7 @@ def make_purchase_invoice(source_name, target_doc=None):
         target.supplier = supplier.get('name')
 
     def update_quotation(source_doc, target_doc, source_parent):
-        target_doc.from_farmer_quotation = source_doc.name
+        source_doc.purchase_invoice = target_doc.name
         source_doc.status = "Promoted"
 
     def update_item(source_doc, target_doc, source_parent):
@@ -77,6 +77,7 @@ def make_purchase_invoice(source_name, target_doc=None):
             "doctype": "Purchase Invoice",
             "validation": {
                 "docstatus": ["=", 1],
+                "status": ["=", "Submitted"],
                 "quotation_type": ["=", "Procurement"]
             },
             "field_map": {
