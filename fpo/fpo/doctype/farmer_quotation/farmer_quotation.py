@@ -29,6 +29,8 @@ def make_purchase_invoice(source_name, target_doc=None):
         set_supplier(source, target)
         target.run_method("set_missing_values")
         target.run_method("calculate_taxes_and_totals")
+        source.purchase_invoice = target.name
+        source.status = "Promoted"
 
     def set_supplier(source, target):
         farmer = frappe.get_doc("Farmer", source.get('farmer'))
@@ -63,15 +65,6 @@ def make_purchase_invoice(source_name, target_doc=None):
 
         target.supplier = supplier.get('name')
 
-    def update_quotation(source_doc, target_doc, source_parent):
-        source_doc.purchase_invoice = target_doc.name
-        source_doc.status = "Promoted"
-
-    def update_item(source_doc, target_doc, source_parent):
-        #target_doc.base_amount = flt(source_doc.qty) * flt(source_doc.base_rate)
-        target_doc.amount = flt(source_doc.qty)  * flt(source_doc.rate)
-        target_doc.qty = flt(source_doc.qty)
-
     doclist = get_mapped_doc("Farmer Quotation", source_name,     {
         "Farmer Quotation": {
             "doctype": "Purchase Invoice",
@@ -87,8 +80,7 @@ def make_purchase_invoice(source_name, target_doc=None):
                 "currency": "currency",
                 "conversion_rate": "conversion_rate",
                 "name": "title"
-            },
-            "postprocess": update_quotation,
+            }
         },
         "Farmer Quotation Item": {
             "doctype": "Purchase Invoice Item",
@@ -100,8 +92,7 @@ def make_purchase_invoice(source_name, target_doc=None):
                 "uom": "uom",
                 "rate": "rate",
                 "amount": "amount",
-            },
-            "postprocess": update_item
+            }
         }
         # ,
         # "Sales Taxes and Charges": {
