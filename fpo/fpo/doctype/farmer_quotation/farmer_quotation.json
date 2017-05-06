@@ -530,7 +530,7 @@
   }, 
   {
    "allow_bulk_edit": 0, 
-   "allow_on_submit": 0, 
+   "allow_on_submit": 1, 
    "bold": 0, 
    "collapsible": 0, 
    "columns": 0, 
@@ -663,7 +663,7 @@
  "issingle": 0, 
  "istable": 0, 
  "max_attachments": 0, 
- "modified": "2017-05-01 08:50:28.559079", 
+ "modified": "2017-05-07 04:12:33.313029", 
  "modified_by": "Administrator", 
  "module": "FPO", 
  "name": "Farmer Quotation", 
