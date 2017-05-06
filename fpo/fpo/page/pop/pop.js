@@ -412,6 +412,27 @@ fpo.pop.PointOfPurchase = erpnext.taxes_and_totals.extend({
 			me.frm.doc.quotation_type = $(this).val();
 		});
 
+		this.crop_season_field = frappe.ui.form.make_control({
+			df: {
+				"fieldtype": "Select",
+				"options": this.meta.quotation.fields.find(
+				    function(field){
+				        return field.fieldname == 'crop_season';
+				        }
+                    ).options,
+				"label": __("Crop Season"),
+				"fieldname": "crop_season",
+				"placeholder": __("Crop Season")
+			},
+			parent: this.wrapper.find(".crop_season"),
+			only_input: true,
+		});
+
+		this.crop_season_field.make_input();
+		this.crop_season_field.$input.on("change", function () {
+			me.frm.doc.crop_season = $(this).val();
+		});
+
 		this.party_field = frappe.ui.form.make_control({
 			df: {
 				"fieldtype": "Data",
@@ -1358,7 +1379,7 @@ fpo.pop.PointOfPurchase = erpnext.taxes_and_totals.extend({
 			frappe.throw(__("Select items to save the invoice"))
 		}
 		for (item in this.frm.doc.items) {
-			if(!item.grade){
+			if(!this.frm.doc.items[item].grade){
 			    frappe.throw(__("Set grade of all items to save the invoice"))
             }
 		}
