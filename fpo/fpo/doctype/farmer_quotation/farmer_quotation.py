@@ -31,11 +31,11 @@ def make_purchase_invoice(source_name, target_doc=None):
         set_supplier(source, target)
         target.run_method("set_missing_values")
         target.run_method("calculate_taxes_and_totals")
+        target.save()
         source.purchase_invoice = target.name
         source.status = "Promoted"
         # frappe.throw(("Due Date {0} cannot be before Posting Date {1}").format(target.due_date, target.posting_date))
 
-        target.save()
         source.save()
         frappe.db.commit()
 
