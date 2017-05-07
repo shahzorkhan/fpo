@@ -665,11 +665,11 @@
  "istable": 0, 
  "max_attachments": 0, 
  "modified": "2017-05-07 06:15:20.876251", 
- "modified_by": "shahzorkhan123@yahoo.co.in", 
+ "modified_by": "Administrator",
  "module": "FPO", 
  "name": "Farmer Quotation", 
  "name_case": "Title Case", 
- "owner": "shahzorkhan123@yahoo.co.in", 
+ "owner": "Administrator",
  "permissions": [
   {
    "amend": 0, 
