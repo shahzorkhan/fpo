@@ -1,6 +1,21 @@
 frappe.provide("fpo.pop");
 {% include "erpnext/public/js/controllers/taxes_and_totals.js" %}
 
+if (!Array.prototype.find) {
+  Array.prototype.find = function (callback, thisArg) {
+    "use strict";
+    var arr = this,
+        arrLen = arr.length,
+        i;
+    for (i = 0; i < arrLen; i += 1) {
+        if (callback.call(thisArg, arr[i], i, arr)) {
+            return arr[i];
+        }
+    }
+    return undefined;
+  };
+}
+
 frappe.pages['pop'].on_page_load = function(wrapper) {
 	var page = frappe.ui.make_app_page({
 		parent: wrapper,
@@ -275,12 +290,27 @@ fpo.pop.PointOfPurchase = erpnext.taxes_and_totals.extend({
 			freeze: true,
 			freeze_message: __("Master data syncing, it might take some time"),
 			callback: function (r) {
+				localStorage.setItem('pop_data', JSON.stringify(r));
 				me.init_master_data(r)
 				localStorage.setItem('doc', JSON.stringify(r.message.doc));
 				me.set_interval_for_fq_sync();
 				me.check_internet_connection();
 				if (callback) {
 					callback();
+				}
+			},
+			error: function (r){
+				if(localStorage.pop_data) {
+					var response = JSON.parse(localStorage.getItem('pop_data'));
+					me.init_master_data(response)
+					me.set_interval_for_fq_sync();
+					me.check_internet_connection();
+					if (callback) {
+						callback();
+					}
+				}
+				else{
+					frappe.show_not_found("pop_data");
 				}
 			}
 		})
@@ -1215,13 +1245,7 @@ fpo.pop.PointOfPurchase = erpnext.taxes_and_totals.extend({
 	},
 
 	print_document: function (html) {
-		var w = window.open();
-		w.document.write(html);
-		w.document.close();
-		setTimeout(function () {
-			w.print();
-			w.close();
-		}, 1000)
+		frappe.app.print_document(html);
 	},
 
 	submit_invoice: function () {
