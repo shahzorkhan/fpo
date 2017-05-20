@@ -1403,7 +1403,8 @@ fpo.pop.PointOfPurchase = erpnext.taxes_and_totals.extend({
 			frappe.throw(__("Select items to save the invoice"))
 		}
 		for (item in this.frm.doc.items) {
-			if(!this.frm.doc.items[item].grade){
+			if(item != 'find' &&  // Hack for App.
+			    !this.frm.doc.items[item].grade){
 			    frappe.throw(__("Set grade of all items to save the invoice"))
             }
 		}
