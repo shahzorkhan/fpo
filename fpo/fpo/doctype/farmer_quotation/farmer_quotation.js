@@ -1,6 +1,6 @@
 // Copyright (c) 2016, Shahzor Khan and contributors
 // For license information, please see license.txt
-debugger;
+
 frappe.ui.form.on('Farmer Quotation', {
 	refresh: function(frm) {
         var doc = frm.doc;

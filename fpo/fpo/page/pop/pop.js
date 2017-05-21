@@ -22,8 +22,8 @@ frappe.pages['pop'].on_page_load = function(wrapper) {
 		title: 'Point of Purchase',
 		single_column: true
 	});
-	alert("on init")
-	debugger;
+	//alert("on init")
+	//debugger
 	wrapper.pop = new fpo.pop.PointOfPurchase(wrapper)
 }
 
