@@ -7,4 +7,6 @@ import frappe
 from frappe.model.document import Document
 
 class Farmer(Document):
-	pass
+	def autoname(self):
+		self.name = self.title
+		#self.name = make_autoname(self.naming_series + '.#####')
