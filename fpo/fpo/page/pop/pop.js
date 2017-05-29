@@ -790,6 +790,17 @@ fpo.pop.PointOfPurchase = erpnext.taxes_and_totals.extend({
 		var me = this;
 		this.frm.doc.farmer = doc.value;//doc.label || doc.name;
 		this.frm.doc.farmer_name = doc.label;
+		var farmer = this.farmers.find(
+            function(entry){
+                return entry.name == doc.value;
+                }
+            );
+		this.frm.doc.farmer_title = farmer.title;
+		this.frm.doc.farmer_bank_details = farmer.bank_details;
+		this.frm.doc.farmer_group = farmer.farmer_group;
+		this.frm.doc.farmer_shg = farmer.shg;
+		this.frm.doc.farmer_village = farmer.village;
+		this.frm.doc.farmer_kcc = farmer.kcc;
 		//this.frm.doc.customer_group = doc.customer_group;
 		//this.frm.doc.territory = doc.territory;
 		this.pop_bill.show();

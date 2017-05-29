@@ -61,6 +61,10 @@ def update_pos_profile_data(doc, pos_profile, company_data):
 
 	doc.currency = pos_profile.get('currency') or company_data.default_currency
 	doc.conversion_rate = 1.0
+	doc.company_address = company_data.address
+	doc.company_email = company_data.email
+	doc.company_phone_no = company_data.phone_no
+	doc.company_website = company_data.website
 
 	if doc.currency != company_data.default_currency:
 		doc.conversion_rate = get_exchange_rate(doc.currency, company_data.default_currency, doc.posting_date)
