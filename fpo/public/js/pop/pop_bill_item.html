@@ -17,13 +17,13 @@
         </div>
     </div>
     <div class="col-xs-2 text-center h6">
-        <select class="pop-item-uom">
+        <select class="form-control pop-item-uom">
         {% for current_uom in uoms %}
-            <option value="{%= current_uom %}"
-                {% if (uom == current_uom) { %}
+            <option value="{%= current_uom.uom %}"
+                {% if (uom == current_uom.uom) { %}
                     selected="true"
                 {% } %}
-                >{%=  __(current_uom) %}</option>
+                >{%=  __(current_uom.uom) %}</option>
         {% endfor %}
         </select>
     </div>

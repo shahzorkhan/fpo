@@ -320,7 +320,7 @@ fpo.pop.PointOfPurchase = erpnext.taxes_and_totals.extend({
 		var me = this;
 		this.meta = r.message.meta;
 		this.item_data = r.message.items;
-		this.item_uoms = format_item_uoms(r.message.item_uoms);
+		this.item_uoms = me.format_item_uoms(r.message.item_uoms);
 		this.item_groups = r.message.item_groups;
 		this.farmers = r.message.farmers;
 		// this.serial_no_data = r.message.serial_no_data;   
@@ -1180,7 +1180,7 @@ fpo.pop.PointOfPurchase = erpnext.taxes_and_totals.extend({
 				item_name: (d.item_name === d.item_code || !d.item_name) ? "" : ("<br>" + d.item_name),
 				qty: d.qty,
 				uom: d.uom,
-				uoms: this.item_uoms[d.item_name || d.item_code],
+				uoms: me.item_uoms[d.item_name || d.item_code],
 				grade: d.grade ? d.grade : "" ,
 				discount_percentage: d.discount_percentage || 0.0,
 				actual_qty: me.actual_qty_dict[d.item_code] || 0.0,
