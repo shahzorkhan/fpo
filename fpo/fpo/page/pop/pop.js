@@ -23,7 +23,7 @@ frappe.pages['pop'].on_page_load = function(wrapper) {
 		single_column: true
 	});
 	//alert("on init")
-	//debugger
+	debugger
 	wrapper.pop = new fpo.pop.PointOfPurchase(wrapper)
 }
 
@@ -320,6 +320,7 @@ fpo.pop.PointOfPurchase = erpnext.taxes_and_totals.extend({
 		var me = this;
 		this.meta = r.message.meta;
 		this.item_data = r.message.items;
+		this.item_uoms = format_item_uoms(r.message.item_uoms);
 		this.item_groups = r.message.item_groups;
 		this.farmers = r.message.farmers;
 		// this.serial_no_data = r.message.serial_no_data;   
@@ -333,6 +334,19 @@ fpo.pop.PointOfPurchase = erpnext.taxes_and_totals.extend({
 		//this.default_customer = r.message.default_customer || null;
 		this.print_settings = locals[":Print Settings"]["Print Settings"];
 //		this.letter_head = (this.pos_profile_data.length > 0) ? frappe.boot.letter_heads[this.pos_profile_data[letter_head]] : {};
+	},
+
+	format_item_uoms: function (downloaded_item_uoms) {
+		var item_uoms = {};
+		for (key in downloaded_item_uoms)
+		{
+			if (!item_uoms[downloaded_item_uoms[key].parent])
+			{
+				item_uoms[downloaded_item_uoms[key].parent] = [];
+			}
+			item_uoms[downloaded_item_uoms[key].parent].push(downloaded_item_uoms[key]);
+		}
+		return item_uoms;
 	},
 
 	save_previous_entry: function () {
@@ -644,14 +658,14 @@ fpo.pop.PointOfPurchase = erpnext.taxes_and_totals.extend({
 			}
 		});
 
-		farmers.push({
-			label: "<span class='text-primary link-option'>"
-			+ "<i class='fa fa-plus' style='margin-right: 5px;'></i> "
-			+ __("Create a new Farmer")
-			+ "</span>",
-			value: 'is_action',
-			action: me.new_farmer
-		});
+//		farmers.push({
+//			label: "<span class='text-primary link-option'>"
+//			+ "<i class='fa fa-plus' style='margin-right: 5px;'></i> "
+//			+ __("Create a new Farmer")
+//			+ "</span>",
+//			value: 'is_action',
+//			action: me.new_farmer
+//		});
 		this.party_field.awesomeplete.list = farmers;
 
 		this.party_field.$input
@@ -920,6 +934,12 @@ fpo.pop.PointOfPurchase = erpnext.taxes_and_totals.extend({
 			me.update_grade(item_code, grade)
 		})
 
+		$(this.wrapper).find(".pop-item-uom").on("change", function () {
+			var item_code = $(this).parents(".pop-bill-item").attr("data-item-code");
+			var uom = $(this).val();
+			me.update_uom(item_code, uom)
+		})
+
 		$(this.wrapper).find(".pop-item-qty").on("change", function () {
 			var item_code = $(this).parents(".pop-bill-item").attr("data-item-code");
 			var qty = $(this).val();
@@ -944,6 +964,17 @@ fpo.pop.PointOfPurchase = erpnext.taxes_and_totals.extend({
 		this.items = this.get_items(item_code);
 		this.validate_serial_no()
 		this.set_item_details(item_code, "qty", qty);
+	},
+
+	update_uom: function(item_code, uom) {
+		var me = this;
+		this.items = this.get_items(item_code);
+
+		$.each(this.frm.doc["items"] || [], function (i, d) {
+			if (d.item_code == item_code) {
+				d["uom"] = uom;
+			}
+		});
 	},
 
 	update_grade: function(item_code, grade) {
@@ -1149,6 +1180,7 @@ fpo.pop.PointOfPurchase = erpnext.taxes_and_totals.extend({
 				item_name: (d.item_name === d.item_code || !d.item_name) ? "" : ("<br>" + d.item_name),
 				qty: d.qty,
 				uom: d.uom,
+				uoms: this.item_uoms[d.item_name || d.item_code],
 				grade: d.grade ? d.grade : "" ,
 				discount_percentage: d.discount_percentage || 0.0,
 				actual_qty: me.actual_qty_dict[d.item_code] || 0.0,

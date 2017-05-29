@@ -16,7 +16,17 @@
             <div class="col-xs-2 text-center pop-qty-btn" data-action="increase-qty"><i class="fa fa-plus text-muted" style="font-size:12px"></i></div>
         </div>
     </div>
-    <div class="col-xs-2 text-center h6">{%= __(uom) || "" %}</div>
+    <div class="col-xs-2 text-center h6">
+        <select class="pop-item-uom">
+        {% for current_uom in uoms %}
+            <option value="{%= current_uom %}"
+                {% if (uom == current_uom) { %}
+                    selected="true"
+                {% } %}
+                >{%=  __(current_uom) %}</option>
+        {% endfor %}
+        </select>
+    </div>
     <div class="col-xs-2 text-right">
         <div class="text-muted" style="margin-top: 5px;">
 			{% if(enabled) { %}

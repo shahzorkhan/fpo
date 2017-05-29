@@ -92,7 +92,7 @@ def get_items_uoms():
 		select
 			name, conversion_factor, uom , parent
 		from
-			`tabUom Conversion Detail`
+			`tabUOM Conversion Detail`
 		 where
 		 	parenttype = 'Item' and parentfield = 'uoms'
 		order by parent,idx
