@@ -19,7 +19,7 @@ if (!Array.prototype.find) {
 frappe.pages['pop'].on_page_load = function(wrapper) {
 	var page = frappe.ui.make_app_page({
 		parent: wrapper,
-		title: 'Point of Purchase',
+		title: __('Point of Purchase'),
 		single_column: true
 	});
 	//alert("on init")
@@ -125,7 +125,7 @@ fpo.pop.PointOfPurchase = erpnext.taxes_and_totals.extend({
 		var me = this;
 		this.fq_docs = this.get_doc_from_localstorage();
 		this.list_dialog = new frappe.ui.Dialog({
-			title: 'Quotation List'
+			title: __('Quotation List')
 		});
 
 		this.list_dialog.show();
@@ -483,7 +483,7 @@ fpo.pop.PointOfPurchase = erpnext.taxes_and_totals.extend({
 				"options": this.party,
 				"label": this.party,
 				"fieldname": this.party.toLowerCase(),
-				"placeholder": __("Select or add new farmer")
+				"placeholder": __("Select farmer")
 			},
 			parent: this.wrapper.find(".party-area"),
 			only_input: true,
