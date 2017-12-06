@@ -1191,7 +1191,7 @@ fpo.pop.PointOfPurchase = erpnext.taxes_and_totals.extend({
 				item_name: (d.item_name === d.item_code || !d.item_name) ? "" : ("<br>" + d.item_name),
 				qty: d.qty,
 				uom: d.uom,
-				uoms: me.item_uoms[d.item_name || d.item_code],
+				uoms: me.item_uoms[d.item_name] || me.item_uoms[d.item_code],
 				grade: d.grade ? d.grade : "" ,
 				discount_percentage: d.discount_percentage || 0.0,
 				actual_qty: me.actual_qty_dict[d.item_code] || 0.0,
