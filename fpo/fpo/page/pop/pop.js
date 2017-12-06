@@ -796,7 +796,7 @@ fpo.pop.PointOfPurchase = erpnext.taxes_and_totals.extend({
                 }
             );
 		this.frm.doc.farmer_title = farmer.title;
-		this.frm.doc.farmer_bank_details = farmer.bank_details;
+		this.frm.doc.farmer_bank_details = farmer.bank_account + + "\r\n"+ farmer.bank_ifsc +"\r\n" + farmer.bank_name;
 		this.frm.doc.farmer_group = farmer.farmer_group;
 		this.frm.doc.farmer_shg = farmer.shg;
 		this.frm.doc.farmer_village = farmer.village;

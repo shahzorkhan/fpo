@@ -104,7 +104,7 @@ def get_items_uoms():
 
 def get_farmers_list():
 
-	return frappe.db.sql(""" select name, title, id, village, cluster, kcc, shg, farmer_group, address, bank_details, mobile from tabFarmer where disabled = 0""",
+	return frappe.db.sql(""" select name, title, id, village, cluster, kcc, shg, farmer_group, address, bank_account, bank_ifsc, bank_name, mobile from tabFarmer where disabled = 0""",
 		as_dict=1) or {}
 
 @frappe.whitelist()
