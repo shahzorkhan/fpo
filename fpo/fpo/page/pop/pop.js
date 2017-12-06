@@ -658,14 +658,14 @@ fpo.pop.PointOfPurchase = erpnext.taxes_and_totals.extend({
 			}
 		});
 
-//		farmers.push({
-//			label: "<span class='text-primary link-option'>"
-//			+ "<i class='fa fa-plus' style='margin-right: 5px;'></i> "
-//			+ __("Create a new Farmer")
-//			+ "</span>",
-//			value: 'is_action',
-//			action: me.new_farmer
-//		});
+		farmers.push({
+			label: "<span class='text-primary link-option'>"
+			+ "<i class='fa fa-plus' style='margin-right: 5px;'></i> "
+			+ __("Create a new Farmer")
+			+ "</span>",
+			value: 'is_action',
+			action: me.new_farmer
+		});
 		this.party_field.awesomeplete.list = farmers;
 
 		this.party_field.$input
@@ -711,58 +711,78 @@ fpo.pop.PointOfPurchase = erpnext.taxes_and_totals.extend({
 			'title': 'Farmer',
 			fields: [
 				{
-					"label": __("Full Name"),
-					"fieldname": "full_name",
+					"label": __("Name"),
+					"fieldname": "title",
 					"fieldtype": "Data",
 					"reqd": 1
 				},
 				{
-					"fieldtype": "Section Break"
+					"label": __("ID"),
+					"fieldname": "id",
+					"fieldtype": "Data",
 				},
 				{
-					"label": __("Email Id"),
-					"fieldname": "email_id",
-					"fieldtype": "Data"
+					"label": __("Village"),
+					"fieldname": "village",
+					"fieldtype": "Data",
 				},
 				{
-					"fieldtype": "Column Break"
-				},
-				{
-					"label": __("Contact Number"),
-					"fieldname": "contact_no",
-					"fieldtype": "Data"
-				},
-				{
-					"fieldtype": "Section Break"
-				},
-				{
-					"label": __("Address Line 1"),
-					"fieldname": "address_line1",
-					"fieldtype": "Data"
-				},
-				{
-					"label": __("Address Line 2"),
-					"fieldname": "address_line2",
-					"fieldtype": "Data"
+					"label": __("Cluster"),
+					"fieldname": "cluster",
+					"fieldtype": "Data",
 				},
 				{
 					"fieldtype": "Column Break"
 				},
 				{
-					"label": __("City"),
-					"fieldname": "city",
+					"label": __("KCC"),
+					"fieldname": "kcc",
+					"fieldtype": "Check",
+				},
+				{
+					"label": __("Father / Husband Name"),
+					"fieldname": "guardian",
+					"fieldtype": "Data",
+					"reqd": 1
+				},
+				{
+					"label": __("SHG Name"),
+					"fieldname": "shg",
+					"fieldtype": "Data",
+				},
+				{
+					"label": __("Farmer Group"),
+					"fieldname": "farmer_group",
+					"fieldtype": "Data",
+				},
+				{
+					"label": __("Image"),
+					"fieldname": "image",
+					"fieldtype": "Attach Image",
+				},
+				{
+					"fieldtype": "Section Break"
+				},
+				{
+					"label": __("Address"),
+					"fieldname": "address",
+					"fieldtype": "Small Text"
+				},
+				{
+					"label": __("Bank Acc. No."),
+					"fieldname": "bank_account",
 					"fieldtype": "Data"
 				},
 				{
-					"label": __("State"),
-					"fieldname": "state",
+					"label": __("Bank IFSC"),
+					"fieldname": "bank_ifsc",
 					"fieldtype": "Data"
 				},
 				{
-					"label": __("ZIP Code"),
-					"fieldname": "zip_code",
+					"label": __("Bank Name"),
+					"fieldname": "bank_name",
 					"fieldtype": "Data"
-				}
+				},
 			]
 		})
 
@@ -775,7 +795,7 @@ fpo.pop.PointOfPurchase = erpnext.taxes_and_totals.extend({
 	},
 
 	make_offline_farmer: function() {
-		this.frm.doc.farmer = this.farmer_doc.get_values().full_name;
+		this.frm.doc.farmer = this.farmer_doc.get_values().title;
 		this.frm.doc.contact_details = JSON.stringify(this.farmer_doc.get_values());
 		this.party_field.$input.val(this.frm.doc.farmer);
 		this.farmers.push({
