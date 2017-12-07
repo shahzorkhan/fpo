@@ -756,11 +756,11 @@ fpo.pop.PointOfPurchase = erpnext.taxes_and_totals.extend({
 					"fieldname": "farmer_group",
 					"fieldtype": "Data",
 				},
-				{
+/*				{
 					"label": __("Image"),
 					"fieldname": "image",
 					"fieldtype": "Attach Image",
-				},
+				},*/
 				{
 					"fieldtype": "Section Break"
 				},
