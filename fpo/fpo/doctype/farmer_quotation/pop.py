@@ -135,7 +135,7 @@ def validate_records(doc):
 def validate_farmer(doc):
 	if not frappe.db.exists('Farmer', doc.get('farmer')):
 		farmer_doc = frappe.new_doc('Farmer')
-		farmer_doc.label = doc.get('farmer')
+		farmer_doc.title = doc.get('farmer')
 		if doc.get('contact_details'):
 			args = json.loads(doc.get("contact_details"))
 			farmer_doc.id = args.get('id')
