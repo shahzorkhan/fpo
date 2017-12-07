@@ -725,11 +725,13 @@ fpo.pop.PointOfPurchase = erpnext.taxes_and_totals.extend({
 					"label": __("Village"),
 					"fieldname": "village",
 					"fieldtype": "Data",
+					"reqd": 1
 				},
 				{
 					"label": __("Cluster"),
 					"fieldname": "cluster",
 					"fieldtype": "Data",
+					"reqd": 1
 				},
 				{
 					"fieldtype": "Column Break"
@@ -743,7 +745,6 @@ fpo.pop.PointOfPurchase = erpnext.taxes_and_totals.extend({
 					"label": __("Father / Husband Name"),
 					"fieldname": "guardian",
 					"fieldtype": "Data",
-					"reqd": 1
 				},
 				{
 					"label": __("SHG Name"),

@@ -135,7 +135,20 @@ def validate_records(doc):
 def validate_farmer(doc):
 	if not frappe.db.exists('Farmer', doc.get('farmer')):
 		farmer_doc = frappe.new_doc('Farmer')
-		farmer_doc.customer_name = doc.get('farmer')
+		farmer_doc.label = doc.get('farmer')
+		if doc.get('contact_details'):
+			args = json.loads(doc.get("contact_details"))
+			farmer_doc.id = args.get('id')
+			farmer_doc.village = args.get('village')
+			farmer_doc.cluster = args.get('cluster')
+			farmer_doc.kcc = args.get('kcc')
+			farmer_doc.guardian = args.get('guardian')
+			farmer_doc.shg = args.get('shg')
+			farmer_doc.farmer_group = args.get('farmer_group')
+			farmer_doc.image = args.get('image')
+			farmer_doc.bank_account = args.get('bank_account')
+			farmer_doc.bank_ifsc = args.get('bank_ifsc')
+			farmer_doc.bank_name = args.get('bank_name')
 		farmer_doc.save(ignore_permissions = True)
 		frappe.db.commit()
 		doc['farmer'] = farmer_doc.name
